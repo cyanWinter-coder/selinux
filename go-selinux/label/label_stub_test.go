@@ -56,6 +56,10 @@ func TestCheckLabelCompile(t *testing.T) {
 		t.Fatal(err)
 	}
 
+	if err := SetProcessLabel("foobar"); err != nil {
+		t.Fatalf("SetProcessLabel must be a no-op without SELinux: %v", err)
+	}
+
 	DisableSecOpt()
 
 	if err := Validate("foobar"); err != nil {
