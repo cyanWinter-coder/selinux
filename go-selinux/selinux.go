@@ -116,6 +116,26 @@ func LfileLabel(fpath string) (string, error) {
 	return lFileLabel(fpath)
 }
 
+// FileContextLabel returns the SELinux file context label that the currently
+// loaded policy associates with fpath, similar to matchpathcon(3). If no file
+// context matches fpath, [ErrContextMissing] is returned.
+//
+// Successful lookups are cached in the calling process, and the cache is
+// tied to the SELinux policy generation: after a policy reload, stale
+// entries are no longer used. Lookup errors (including [ErrContextMissing])
+// are never cached, so a failed lookup does not turn into a permanent
+// success. Use [FlushFileContextCache] to clear the cache explicitly.
+func FileContextLabel(fpath string) (string, error) {
+	return lookupFileContext(fpath)
+}
+
+// FlushFileContextCache clears the process-local file context caches used by
+// [FileContextLabel]. It only clears local caches; it does not reload or
+// otherwise modify the system SELinux policy.
+func FlushFileContextCache() {
+	flushFileContextCache()
+}
+
 // SetFSCreateLabel tells the kernel what label to use for all file system objects
 // created by this task.
 // Set the label to an empty string to return to the default label. Calls to SetFSCreateLabel

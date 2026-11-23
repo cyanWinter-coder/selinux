@@ -25,6 +25,10 @@ func TestSELinuxStubs(t *testing.T) {
 	if _, err := LfileLabel(tmpDir); err != nil {
 		t.Error(err)
 	}
+	if _, err := FileContextLabel(tmpDir); err != nil {
+		t.Error(err)
+	}
+	FlushFileContextCache()
 	if err := LsetFileLabel(tmpDir, testLabel); err != nil {
 		t.Error(err)
 	}
