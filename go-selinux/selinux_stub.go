@@ -36,6 +36,20 @@ func lFileLabel(string) (string, error) {
 	return "", nil
 }
 
+func lookupFileContext(string, *FileContextOptions) (*FileContextResult, error) {
+	return &FileContextResult{}, nil
+}
+
+func applyFileContext(string, *FileContextOptions) (*FileContextResult, error) {
+	return &FileContextResult{}, nil
+}
+
+func setFileContext(string, string, *FileContextOptions) (*FileContextResult, error) {
+	return &FileContextResult{}, nil
+}
+
+func flushFileContextCache() {}
+
 func setFSCreateLabel(string) error {
 	return nil
 }

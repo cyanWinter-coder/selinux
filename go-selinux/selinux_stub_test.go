@@ -123,4 +123,15 @@ func TestSELinuxStubs(t *testing.T) {
 	if _, err = SetProcessKind("", ProcessKindRegular); err != nil {
 		t.Error(err)
 	}
+
+	if _, err := LookupFileContext("/etc/passwd", nil); err != nil {
+		t.Error(err)
+	}
+	if _, err := ApplyFileContext("/etc/passwd", nil); err != nil {
+		t.Error(err)
+	}
+	if _, err := SetFileContext("/etc/passwd", testLabel, nil); err != nil {
+		t.Error(err)
+	}
+	FlushFileContextCache()
 }
